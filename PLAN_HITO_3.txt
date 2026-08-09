@@ -1,0 +1,61 @@
+PLAN PARA CUMPLIR EL HITO 3 (10/10) - E-SHOPING
+=================================================
+
+Objetivo: Reestructurar el proyecto e-shoping aplicando Arquitectura Limpia y
+DDD (patrón Repositorio), separando domain, application e infrastructure.
+
+Estado actual (brechas detectadas):
+- No existen paquetes domain / application / infrastructure.
+- Las entidades (Product, Cart, CartItem, Category, Mark) importan jakarta.persistence
+  y jakarta.validation (acoplamiento de framework en el núcleo).
+- Los repositorios heredan de JpaRepository (Spring Data).
+- Los services importan org.springframework.stereotype.Service.
+- No hay Value Objects (records) ni validación defensiva.
+- Entidades anémicas (solo getters/setters).
+- El README.md describe la estructura vieja.
+
+PASOS ORDENADOS POR PRIORIDAD
+-----------------------------
+
+[PASO 1]  Paquete domain (Java puro, cero frameworks)
+  1.1  Crear com.mabc.domain.exception con DomainException base y excepciones
+       específicas (InvalidNameException, InvalidDescriptionException,
+       InvalidPriceException, InvalidStockException, InvalidWeightException,
+       InvalidQuantityException).
+  1.2  Crear com.mabc.domain.valueobject con records inmutables auto-validantes:
+       Name, Description, Price, Stock, Weight, Quantity.
+  1.3  Crear com.mabc.domain.entity migrando las entidades del negocio
+       (Product, Cart, CartItem, Category, Mark) SIN importar Jakarta ni Spring.
+       Identidad única inmutable (id final) + validación en el constructor.
+  1.4  Encapsulamiento del dominio: métodos de negocio descriptivos en lugar de
+       getters/setters anémicos (rename, activate, deactivate, restock,
+       updatePrices, addItem, calculateSubTotal, reduceStock, etc.).
+
+[PASO 2]  Paquete application (casos de uso)
+  2.1  Crear com.mabc.domain.repository con interfaces puras de repositorio
+       (ProductRepository, CartRepository, CategoryRepository, MarkRepository)
+       que operen solo con objetos de dominio.
+  2.2  Crear com.mabc.application.usecase moviendo la lógica de los services a
+       casos de uso cohesivos (CreateProductUseCase, AddItemToCartUseCase,
+       SaveCategoryUseCase, SaveMarkUseCase) con inyección por constructor y
+       cero uso de 'new' sobre implementaciones concretas.
+
+[PASO 3]  Paquete infrastructure (Spring, DB, mappers)
+  3.1  Crear com.mabc.infrastructure.persistence con implementaciones JPA de los
+       contratos (JpaProductRepository implements ProductRepository, etc.)
+       adaptando objetos de dominio <-> entidades de persistencia.
+  3.2  Eliminar/migrar com.mabc.repositories (JpaRepository) y com.mabc.services.
+       Los DTOs actuales pasan a infrastructure (mappers) o se eliminan si los
+       use cases devuelven dominio directamente.
+  3.3  Reemplazar App.java por un wiring simple (main) que inyecte las
+       implementaciones concretas a los casos de uso.
+
+[PASO 4]  Pruebas y entregable
+  4.1  Migrar las 4 suites de tests (CartServiceImplTest, CategoryServiceImplTest,
+       MarkServiceImplTest, ProductServiceImplTest) a los casos de uso inyectando
+       mocks de las interfaces puras. Agregar tests de Value Objects y de
+       validaciones de dominio.
+  4.2  Verificar con: mvn clean compile y mvn test (más cobertura JaCoCo).
+  4.3  Reescribir README.md: título + descripción de la solución reestructurada,
+       mapa de paquetes (domain / application / infrastructure) e instrucciones
+       de ejecución (mvn clean compile, mvn test).
