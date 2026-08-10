@@ -1,90 +1,53 @@
 # E-Shoping
 
-Aplicacion de comercio electronico que gestiona un carrito de compras con productos, marcas y categorias.
+Aplicación de comercio electrónico que gestiona un carrito de compras con productos, marcas y categorías.
 
-## Tecnologias
+Proyecto integrador reestructurado bajo **Arquitectura Limpia** y patrones tácticos de **DDD** (patrón Repositorio como frontera tecnológica). El núcleo de negocio es **Java puro**: las capas internas (`domain` y `application`) no dependen de frameworks ni librerías externas.
 
-- Java 25
-- Maven
-- Spring Data JPA
-- Hibernate
-- Jakarta Persistence
-- JUnit 5 + Mockito
-- JaCoCo (cobertura de codigo)
+## Arquitectura
 
-## Estructura del proyecto
+La solución separa estrictamente tres capas con regla de dependencia unidireccional (las capas externas dependen de las internas, jamás al revés):
 
 ```
 e-shoping/
-├── pom.xml
 └── src/
     ├── main/java/com/mabc/
-    │   ├── App.java
-    │   ├── dto/
-    │   │   ├── CartDTO.java
-    │   │   ├── CartItemDTO.java
-    │   │   ├── CategoryDTO.java
-    │   │   ├── MarkDTO.java
-    │   │   └── ProductDTO.java
-    │   ├── entities/
-    │   │   ├── Cart.java
-    │   │   ├── CartItem.java
-    │   │   ├── Category.java
-    │   │   ├── Mark.java
-    │   │   └── Product.java
-    │   ├── repositories/
-    │   │   ├── CartRepository.java
-    │   │   ├── CategoryRepository.java
-    │   │   ├── MarkRepository.java
-    │   │   └── ProductRepository.java
-    │   └── services/
-    │       ├── cart/
-    │       │   ├── CartService.java
-    │       │   └── CartServiceImpl.java
-    │       ├── category/
-    │       │   ├── CategoryService.java
-    │       │   └── CategoryServiceImpl.java
-    │       ├── mark/
-    │       │   ├── MarkService.java
-    │       │   └── MarkServiceImpl.java
-    │       └── product/
-    │           ├── ProductService.java
-    │           └── ProductServiceImpl.java
+    │   ├── domain/                    <- Java puro, CERO frameworks
+    │   │   ├── entity/                <- Product, Cart, CartItem, Category, Mark
+    │   │   ├── valueobject/           <- Name, Description, Price, Stock, Weight, Quantity (records)
+    │   │   ├── exception/             <- DomainException, InvalidNameException, ...
+    │   │   └── repository/            <- Contratos abstractos (interfaces puras)
+    │   ├── application/
+    │   │   └── usecase/               <- CreateProductUseCase, AddItemToCartUseCase, ...
+    │   └── infrastructure/
+    │       └── persistence/           <- Spring Data JPA, entidades JPA, adaptadores, in-memory
     └── test/java/com/mabc/
-        ├── CartServiceImplTest.java
-        ├── CategoryServiceImplTest.java
-        ├── ConsoleCoverageReporter.java
-        ├── MarkServiceImplTest.java
-        └── ProductServiceImplTest.java
+        ├── domain/                    <- Tests de entidades y Value Objects
+        └── application/usecase/       <- Tests de casos de uso (desacoplamiento)
 ```
 
-## Ejecucion de tests
+- **`domain`**: Entidades con identidad única e inmutable (`id` final), Value Objects auto-validantes (`record` con validación defensiva en el constructor) y excepciones de dominio. No contiene importaciones ni anotaciones de Jakarta, Spring, Jackson o JPA.
+- **`application`**: Casos de uso cohesivos (un solo flujo de negocio) que reciben la interfaz del repositorio por **inyección por constructor**, sin instanciar implementaciones concretas (`new`).
+- **`infrastructure`**: Implementaciones tecnológicas de los contratos de dominio: repositorios Spring Data JPA, entidades JPA, mapeadores dominio↔persistencia y una implementación en memoria para la ejecución de demostración.
 
-Desde la raiz del proyecto (`e-shoping/`):
+## Ejecución
+
+Todos los comandos se ejecutan desde la raíz del módulo Maven (`e-shoping/`).
+
+Para compilar y verificar el proyecto:
+
+```bash
+mvn clean compile
+```
+
+Para ejecutar la suite de pruebas unitarias que validan el desacoplamiento (38 tests + reporte de cobertura JaCoCo):
 
 ```bash
 mvn test
 ```
 
-Esto ejecuta los 38 tests y genera un reporte de cobertura en consola.
-
-### Ver reporte de cobertura en HTML
+Para ejecutar la aplicación de demostración (wiring de implementaciones en casos de uso):
 
 ```bash
-mvn test
-start target/site/jacoco/index.html
+mvn exec:java -Dexec.mainClass="com.mabc.App"
 ```
-
-### Ver reporte de cobertura en consola
-
-```bash
-mvn exec:java -Dexec.mainClass="com.mabc.ConsoleCoverageReporter"
-```
-
-## Metricas de cobertura
-
-| Metrica       | Cobertura  |
-|---------------|------------|
-| INSTRUCTION   | 95.85%     |
-| BRANCH        | 100.00%    |
-| LINE          | 94.70%     |
