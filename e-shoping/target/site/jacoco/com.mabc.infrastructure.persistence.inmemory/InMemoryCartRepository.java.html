@@ -3,32 +3,44 @@
 import com.mabc.domain.entity.Cart;
 import com.mabc.domain.repository.CartRepository;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
-<span class="fc" id="L14">public class InMemoryCartRepository implements CartRepository {</span>
+/**
+ * Implementación en memoria de {@link CartRepository}.
+ *
+ * &lt;p&gt;Almacena los carritos en un {@link LinkedHashMap} que conserva el orden
+ * de inserción, sin persistencia entre ejecuciones de la aplicación.
+ */
+<span class="fc" id="L17">public class InMemoryCartRepository implements CartRepository {</span>
 
-<span class="fc" id="L16">    private final Map&lt;Long, Cart&gt; store = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L19">    private final Map&lt;Long, Cart&gt; store = new LinkedHashMap&lt;&gt;();</span>
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional&lt;Cart&gt; findById(Long id) {
-<span class="fc" id="L20">        return Optional.ofNullable(store.get(id));</span>
+<span class="fc" id="L26">        return Optional.ofNullable(store.get(id));</span>
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional&lt;Cart&gt; findLast() {
-<span class="fc" id="L25">        return store.values().stream().max(Comparator.comparing(Cart::getId));</span>
+<span class="fc" id="L34">        return store.values().stream().max(Comparator.comparing(Cart::getId));</span>
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cart save(Cart cart) {
-<span class="fc" id="L30">        store.put(cart.getId(), cart);</span>
-<span class="fc" id="L31">        return cart;</span>
+<span class="fc" id="L42">        store.put(cart.getId(), cart);</span>
+<span class="fc" id="L43">        return cart;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

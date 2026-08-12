@@ -16,33 +16,45 @@ import com.mabc.infrastructure.persistence.inmemory.InMemoryProductRepository;
 
 import java.util.List;
 
-<span class="nc" id="L19">public class App {</span>
+/**
+ * Punto de entrada de la aplicación e-shoping.
+ *
+ * &lt;p&gt;Este demo construye los repositorios en memoria, los casos de uso de la
+ * capa de aplicación y ejecuta un flujo de ejemplo que crea una marca, una
+ * categoría, un producto y un carrito de compras al que se le agrega un ítem.
+ */
+<span class="nc" id="L26">public class App {</span>
 
+    /**
+     * Método principal que ejecuta el flujo de demostración de la aplicación.
+     *
+     * @param args argumentos de línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
-<span class="nc" id="L22">        InMemoryMarkRepository markRepository = new InMemoryMarkRepository();</span>
-<span class="nc" id="L23">        InMemoryCategoryRepository categoryRepository = new InMemoryCategoryRepository();</span>
-<span class="nc" id="L24">        InMemoryProductRepository productRepository = new InMemoryProductRepository();</span>
-<span class="nc" id="L25">        InMemoryCartRepository cartRepository = new InMemoryCartRepository();</span>
+<span class="nc" id="L34">        InMemoryMarkRepository markRepository = new InMemoryMarkRepository();</span>
+<span class="nc" id="L35">        InMemoryCategoryRepository categoryRepository = new InMemoryCategoryRepository();</span>
+<span class="nc" id="L36">        InMemoryProductRepository productRepository = new InMemoryProductRepository();</span>
+<span class="nc" id="L37">        InMemoryCartRepository cartRepository = new InMemoryCartRepository();</span>
 
-<span class="nc" id="L27">        SaveMarkUseCase saveMarkUseCase = new SaveMarkUseCase(markRepository);</span>
-<span class="nc" id="L28">        SaveCategoryUseCase saveCategoryUseCase = new SaveCategoryUseCase(categoryRepository);</span>
-<span class="nc" id="L29">        CreateProductUseCase createProductUseCase =</span>
+<span class="nc" id="L39">        SaveMarkUseCase saveMarkUseCase = new SaveMarkUseCase(markRepository);</span>
+<span class="nc" id="L40">        SaveCategoryUseCase saveCategoryUseCase = new SaveCategoryUseCase(categoryRepository);</span>
+<span class="nc" id="L41">        CreateProductUseCase createProductUseCase =</span>
                 new CreateProductUseCase(productRepository, categoryRepository, markRepository);
-<span class="nc" id="L31">        CreateCartUseCase createCartUseCase = new CreateCartUseCase(cartRepository);</span>
-<span class="nc" id="L32">        AddItemToCartUseCase addItemToCartUseCase =</span>
+<span class="nc" id="L43">        CreateCartUseCase createCartUseCase = new CreateCartUseCase(cartRepository);</span>
+<span class="nc" id="L44">        AddItemToCartUseCase addItemToCartUseCase =</span>
                 new AddItemToCartUseCase(cartRepository, productRepository);
 
-<span class="nc" id="L35">        Mark mark = saveMarkUseCase.execute(null, &quot;Lenovo&quot;, true);</span>
-<span class="nc" id="L36">        Category category = saveCategoryUseCase.execute(null, &quot;Computacion&quot;, true);</span>
-<span class="nc" id="L37">        Product product = createProductUseCase.execute(</span>
-<span class="nc" id="L38">                null, mark.getId(), List.of(category.getId()),</span>
+<span class="nc" id="L47">        Mark mark = saveMarkUseCase.execute(null, &quot;Lenovo&quot;, true);</span>
+<span class="nc" id="L48">        Category category = saveCategoryUseCase.execute(null, &quot;Computacion&quot;, true);</span>
+<span class="nc" id="L49">        Product product = createProductUseCase.execute(</span>
+<span class="nc" id="L50">                null, mark.getId(), List.of(category.getId()),</span>
                 &quot;Notebook Lenovo&quot;, &quot;Notebook Lenovo IdeaPad 310&quot;, 12, 1500, 650000, 800000);
-<span class="nc" id="L40">        Cart cart = createCartUseCase.execute();</span>
-<span class="nc" id="L41">        cart = addItemToCartUseCase.execute(cart.getId(), product.getId(), 1);</span>
+<span class="nc" id="L52">        Cart cart = createCartUseCase.execute();</span>
+<span class="nc" id="L53">        cart = addItemToCartUseCase.execute(cart.getId(), product.getId(), 1);</span>
 
-<span class="nc" id="L43">        System.out.println(&quot;Carrito &quot; + cart.getId() + &quot; creado con &quot;</span>
-<span class="nc" id="L44">                + cart.getItems().size() + &quot; item(s).&quot;);</span>
-<span class="nc" id="L45">        System.out.println(&quot;Subtotal: $&quot; + cart.getSubTotal());</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L55">        System.out.println(&quot;Carrito &quot; + cart.getId() + &quot; creado con &quot;</span>
+<span class="nc" id="L56">                + cart.getItems().size() + &quot; item(s).&quot;);</span>
+<span class="nc" id="L57">        System.out.println(&quot;Subtotal: $&quot; + cart.getSubTotal());</span>
+<span class="nc" id="L58">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

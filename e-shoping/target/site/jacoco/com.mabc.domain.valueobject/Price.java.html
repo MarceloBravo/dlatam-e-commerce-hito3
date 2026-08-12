@@ -2,12 +2,24 @@
 
 import com.mabc.domain.exception.InvalidPriceException;
 
+/**
+ * Value object que representa un precio.
+ *
+ * &lt;p&gt;Valida que el precio no sea negativo.
+ *
+ * @param value valor del precio.
+ */
 public record Price(double value) {
 
-<span class="fc" id="L7">    public Price {</span>
-<span class="fc bfc" id="L8" title="All 2 branches covered.">        if (value &lt; 0) {</span>
-<span class="fc" id="L9">            throw new InvalidPriceException(&quot;El precio no puede ser negativo.&quot;);</span>
+    /**
+     * Constructor compacto que valida el precio.
+     *
+     * @throws InvalidPriceException si el precio es negativo.
+     */
+<span class="fc" id="L19">    public Price {</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (value &lt; 0) {</span>
+<span class="fc" id="L21">            throw new InvalidPriceException(&quot;El precio no puede ser negativo.&quot;);</span>
         }
-<span class="fc" id="L11">    }</span>
+<span class="fc" id="L23">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

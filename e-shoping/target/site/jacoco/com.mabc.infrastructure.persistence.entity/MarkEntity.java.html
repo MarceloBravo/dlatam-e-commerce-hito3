@@ -7,6 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad JPA que representa la tabla {@code marks} de la base de datos.
+ *
+ * &lt;p&gt;Contiene la información persistida de una marca, incluyendo su nombre
+ * y su estado de actividad.
+ */
 @Entity
 @Table(name = &quot;marks&quot;)
 public class MarkEntity {
@@ -21,37 +27,37 @@ public class MarkEntity {
     @Column(nullable = false)
     private Boolean active;
 
-<span class="nc" id="L24">    public MarkEntity() {</span>
-<span class="nc" id="L25">    }</span>
-
-<span class="nc" id="L27">    public MarkEntity(Long id, String name, Boolean active) {</span>
-<span class="nc" id="L28">        this.id = id;</span>
-<span class="nc" id="L29">        this.name = name;</span>
-<span class="nc" id="L30">        this.active = active;</span>
+<span class="nc" id="L30">    public MarkEntity() {</span>
 <span class="nc" id="L31">    }</span>
 
+<span class="nc" id="L33">    public MarkEntity(Long id, String name, Boolean active) {</span>
+<span class="nc" id="L34">        this.id = id;</span>
+<span class="nc" id="L35">        this.name = name;</span>
+<span class="nc" id="L36">        this.active = active;</span>
+<span class="nc" id="L37">    }</span>
+
     public Long getId() {
-<span class="nc" id="L34">        return id;</span>
+<span class="nc" id="L40">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L38">        this.id = id;</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L44">        this.id = id;</span>
+<span class="nc" id="L45">    }</span>
 
     public String getName() {
-<span class="nc" id="L42">        return name;</span>
+<span class="nc" id="L48">        return name;</span>
     }
 
     public void setName(String name) {
-<span class="nc" id="L46">        this.name = name;</span>
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L52">        this.name = name;</span>
+<span class="nc" id="L53">    }</span>
 
     public Boolean getActive() {
-<span class="nc" id="L50">        return active;</span>
+<span class="nc" id="L56">        return active;</span>
     }
 
     public void setActive(Boolean active) {
-<span class="nc" id="L54">        this.active = active;</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L60">        this.active = active;</span>
+<span class="nc" id="L61">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

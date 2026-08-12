@@ -3,20 +3,36 @@
 import com.mabc.domain.entity.Cart;
 import com.mabc.domain.repository.CartRepository;
 
+/**
+ * Caso de uso que crea un nuevo carrito de compras.
+ *
+ * &lt;p&gt;Calcula el siguiente identificador disponible a partir del último
+ * carrito registrado y lo persiste vacío.
+ */
 public class CreateCartUseCase {
 
     private final CartRepository cartRepository;
 
-<span class="fc" id="L10">    public CreateCartUseCase(CartRepository cartRepository) {</span>
-<span class="fc" id="L11">        this.cartRepository = cartRepository;</span>
-<span class="fc" id="L12">    }</span>
+    /**
+     * Crea el caso de uso con el repositorio de carritos.
+     *
+     * @param cartRepository repositorio de carritos de compras.
+     */
+<span class="fc" id="L21">    public CreateCartUseCase(CartRepository cartRepository) {</span>
+<span class="fc" id="L22">        this.cartRepository = cartRepository;</span>
+<span class="fc" id="L23">    }</span>
 
+    /**
+     * Crea y persiste un nuevo carrito de compras vacío.
+     *
+     * @return el carrito recién creado.
+     */
     public Cart execute() {
-<span class="fc" id="L15">        Long nextId = cartRepository.findLast()</span>
-<span class="fc" id="L16">                .map(cart -&gt; cart.getId() + 1)</span>
-<span class="fc" id="L17">                .orElse(1L);</span>
-<span class="fc" id="L18">        Cart cart = new Cart(nextId);</span>
-<span class="fc" id="L19">        return cartRepository.save(cart);</span>
+<span class="fc" id="L31">        Long nextId = cartRepository.findLast()</span>
+<span class="fc" id="L32">                .map(cart -&gt; cart.getId() + 1)</span>
+<span class="fc" id="L33">                .orElse(1L);</span>
+<span class="fc" id="L34">        Cart cart = new Cart(nextId);</span>
+<span class="fc" id="L35">        return cartRepository.save(cart);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

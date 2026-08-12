@@ -10,36 +10,63 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementación de {@link MarkRepository} basada en JPA/Spring Data.
+ *
+ * <p>Convierte entre las entidades de dominio {@link Mark} y las entidades
+ * de persistencia {@link MarkEntity} delegando el acceso a la base de datos
+ * en {@link MarkJpaRepository}.
+ */
 @Repository
 public class JpaMarkRepository implements MarkRepository {
 
     private final MarkJpaRepository markJpaRepository;
 
+    /**
+     * Crea el repositorio JPA de marcas.
+     *
+     * @param markJpaRepository repositorio Spring Data de entidades de marca.
+     */
     public JpaMarkRepository(MarkJpaRepository markJpaRepository) {
         this.markJpaRepository = markJpaRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Mark> findById(Long id) {
         return markJpaRepository.findById(id).map(this::toDomain);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Mark> findAll() {
         return markJpaRepository.findAll().stream().map(this::toDomain).toList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Mark save(Mark mark) {
         MarkEntity saved = markJpaRepository.save(toEntity(mark));
         return toDomain(saved);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteById(Long id) {
         markJpaRepository.deleteById(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean existsById(Long id) {
         return markJpaRepository.existsById(id);

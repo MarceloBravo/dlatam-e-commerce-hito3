@@ -2,13 +2,26 @@
 
 import com.mabc.domain.exception.InvalidNameException;
 
+/**
+ * Value object que representa un nombre.
+ *
+ * &lt;p&gt;Valida que el nombre no sea nulo ni esté vacío y lo normaliza
+ * eliminando espacios en blanco al inicio y al final.
+ *
+ * @param value texto del nombre.
+ */
 public record Name(String value) {
 
-<span class="fc" id="L7">    public Name {</span>
-<span class="fc bfc" id="L8" title="All 4 branches covered.">        if (value == null || value.isBlank()) {</span>
-<span class="fc" id="L9">            throw new InvalidNameException(&quot;El nombre no puede ser nulo o estar vacío.&quot;);</span>
+    /**
+     * Constructor compacto que valida y normaliza el nombre.
+     *
+     * @throws InvalidNameException si el nombre es nulo o está vacío.
+     */
+<span class="fc" id="L20">    public Name {</span>
+<span class="fc bfc" id="L21" title="All 4 branches covered.">        if (value == null || value.isBlank()) {</span>
+<span class="fc" id="L22">            throw new InvalidNameException(&quot;El nombre no puede ser nulo o estar vacío.&quot;);</span>
         }
-<span class="fc" id="L11">        value = value.trim();</span>
-<span class="fc" id="L12">    }</span>
+<span class="fc" id="L24">        value = value.trim();</span>
+<span class="fc" id="L25">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

@@ -1,8 +1,10 @@
-D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\ProductEntityMapper.java
+D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\jpa\JpaProductRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\inmemory\InMemoryProductRepository.java
+D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\jpa\ProductEntityMapper.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\valueobject\Price.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\repository\CartRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\exception\InvalidStockException.java
+D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\jpa\JpaCartRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\application\usecase\SaveCategoryUseCase.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\entity\CartEntity.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\exception\InvalidQuantityException.java
@@ -15,7 +17,6 @@ D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mab
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\valueobject\Name.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\entity\Cart.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\entity\Mark.java
-D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\JpaCategoryRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\valueobject\Quantity.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\inmemory\InMemoryCartRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\valueobject\Stock.java
@@ -26,7 +27,7 @@ D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mab
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\exception\InvalidWeightException.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\repository\MarkRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\exception\DomainException.java
-D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\JpaProductRepository.java
+D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\jpa\JpaCategoryRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\valueobject\Description.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\entity\CartItemEntity.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\entity\ProductEntity.java
@@ -37,10 +38,9 @@ D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mab
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\application\usecase\SaveMarkUseCase.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\entity\CartItem.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\spring\CartJpaRepository.java
-D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\JpaCartRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\entity\Category.java
+D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\jpa\JpaMarkRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\spring\CategoryJpaRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\entity\Product.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\repository\ProductRepository.java
-D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\infrastructure\persistence\JpaMarkRepository.java
 D:\bootcamps\Java Desafio Latam\ejercicios\hito3\e-shoping\src\main\java\com\mabc\domain\exception\InvalidPriceException.java

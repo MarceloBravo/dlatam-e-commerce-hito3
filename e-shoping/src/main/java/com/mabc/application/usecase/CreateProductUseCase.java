@@ -14,12 +14,25 @@ import com.mabc.domain.valueobject.Weight;
 
 import java.util.List;
 
+/**
+ * Caso de uso que crea o actualiza un producto.
+ *
+ * <p>Si se entrega un {@code id} nulo se crea un producto nuevo; en caso
+ * contrario se actualizan los datos del producto existente.
+ */
 public class CreateProductUseCase {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final MarkRepository markRepository;
 
+    /**
+     * Crea el caso de uso con los repositorios necesarios.
+     *
+     * @param productRepository  repositorio de productos.
+     * @param categoryRepository repositorio de categorías.
+     * @param markRepository     repositorio de marcas.
+     */
     public CreateProductUseCase(
         ProductRepository productRepository, 
         CategoryRepository categoryRepository,
@@ -30,6 +43,22 @@ public class CreateProductUseCase {
         this.markRepository = markRepository;
     }
 
+    /**
+     * Crea un producto nuevo o actualiza uno existente.
+     *
+     * @param id          identificador del producto; si es {@code null} se crea uno nuevo.
+     * @param markId      identificador de la marca del producto.
+     * @param categoryIds lista de identificadores de categorías del producto.
+     * @param name        nombre del producto.
+     * @param description descripción del producto.
+     * @param stock       cantidad de unidades en stock.
+     * @param weight      peso del producto.
+     * @param priceCost   precio de costo del producto.
+     * @param priceSale   precio de venta del producto.
+     * @return el producto creado o actualizado y persistido.
+     * @throws IllegalArgumentException si la marca no existe o alguna
+     *                                  categoría no existe.
+     */
     public Product execute(
         Long id, 
         Long markId, 

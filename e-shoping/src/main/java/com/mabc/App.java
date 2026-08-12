@@ -16,8 +16,20 @@ import com.mabc.infrastructure.persistence.inmemory.InMemoryProductRepository;
 
 import java.util.List;
 
+/**
+ * Punto de entrada de la aplicación e-shoping.
+ *
+ * <p>Este demo construye los repositorios en memoria, los casos de uso de la
+ * capa de aplicación y ejecuta un flujo de ejemplo que crea una marca, una
+ * categoría, un producto y un carrito de compras al que se le agrega un ítem.
+ */
 public class App {
 
+    /**
+     * Método principal que ejecuta el flujo de demostración de la aplicación.
+     *
+     * @param args argumentos de línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         InMemoryMarkRepository markRepository = new InMemoryMarkRepository();
         InMemoryCategoryRepository categoryRepository = new InMemoryCategoryRepository();

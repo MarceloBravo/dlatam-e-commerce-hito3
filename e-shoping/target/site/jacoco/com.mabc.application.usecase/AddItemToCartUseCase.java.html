@@ -6,25 +6,47 @@ import com.mabc.domain.repository.CartRepository;
 import com.mabc.domain.repository.ProductRepository;
 import com.mabc.domain.valueobject.Quantity;
 
+/**
+ * Caso de uso que agrega un producto al carrito de compras.
+ *
+ * &lt;p&gt;Valida que el carrito y el producto existan y delega en la entidad
+ * {@link Cart} la lógica de agregar el ítem con la cantidad indicada.
+ */
 public class AddItemToCartUseCase {
 
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
 
-<span class="fc" id="L14">    public AddItemToCartUseCase(CartRepository cartRepository, ProductRepository productRepository) {</span>
-<span class="fc" id="L15">        this.cartRepository = cartRepository;</span>
-<span class="fc" id="L16">        this.productRepository = productRepository;</span>
-<span class="fc" id="L17">    }</span>
+    /**
+     * Crea el caso de uso con los repositorios necesarios.
+     *
+     * @param cartRepository    repositorio de carritos de compras.
+     * @param productRepository repositorio de productos.
+     */
+<span class="fc" id="L26">    public AddItemToCartUseCase(CartRepository cartRepository, ProductRepository productRepository) {</span>
+<span class="fc" id="L27">        this.cartRepository = cartRepository;</span>
+<span class="fc" id="L28">        this.productRepository = productRepository;</span>
+<span class="fc" id="L29">    }</span>
 
+    /**
+     * Agrega un producto a un carrito con la cantidad indicada.
+     *
+     * @param cartId    identificador del carrito al que se agregará el ítem.
+     * @param productId identificador del producto que se agregará.
+     * @param quantity  cantidad de unidades del producto a agregar.
+     * @return el carrito actualizado y persistido.
+     * @throws IllegalStateException si el carrito o el producto no existen,
+     *                               o si no hay stock suficiente.
+     */
     public Cart execute(Long cartId, Long productId, int quantity) {
-<span class="fc" id="L20">        Cart cart = cartRepository.findById(cartId)</span>
-<span class="fc" id="L21">                .orElseThrow(() -&gt; new IllegalStateException(&quot;El carrito no existe o no es válido.&quot;));</span>
+<span class="fc" id="L42">        Cart cart = cartRepository.findById(cartId)</span>
+<span class="fc" id="L43">                .orElseThrow(() -&gt; new IllegalStateException(&quot;El carrito no existe o no es válido.&quot;));</span>
 
-<span class="fc" id="L23">        Product product = productRepository.findById(productId)</span>
-<span class="fc" id="L24">                .orElseThrow(() -&gt; new IllegalStateException(&quot;El producto no existe o no es válido.&quot;));</span>
+<span class="fc" id="L45">        Product product = productRepository.findById(productId)</span>
+<span class="fc" id="L46">                .orElseThrow(() -&gt; new IllegalStateException(&quot;El producto no existe o no es válido.&quot;));</span>
 
-<span class="fc" id="L26">        cart.addItem(product, new Quantity(quantity));</span>
-<span class="fc" id="L27">        return cartRepository.save(cart);</span>
+<span class="fc" id="L48">        cart.addItem(product, new Quantity(quantity));</span>
+<span class="fc" id="L49">        return cartRepository.save(cart);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

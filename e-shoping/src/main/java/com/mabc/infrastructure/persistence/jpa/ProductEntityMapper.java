@@ -14,11 +14,23 @@ import com.mabc.infrastructure.persistence.entity.ProductEntity;
 
 import java.util.List;
 
+/**
+ * Mapper que convierte entre la entidad de dominio {@link Product} y la
+ * entidad de persistencia {@link ProductEntity}.
+ *
+ * <p>Clase utilitaria con métodos estáticos, no instanciable.
+ */
 public final class ProductEntityMapper {
 
     private ProductEntityMapper() {
     }
 
+    /**
+     * Convierte una entidad de persistencia en una entidad de dominio.
+     *
+     * @param entity entidad JPA de producto a convertir.
+     * @return el producto de dominio resultante.
+     */
     public static Product toDomain(ProductEntity entity) {
         MarkEntity markEntity = entity.getMark();
         Mark mark = new Mark(markEntity.getId(), new Name(markEntity.getName()));
@@ -45,6 +57,12 @@ public final class ProductEntityMapper {
                 new Price(entity.getPriceSale()));
     }
 
+    /**
+     * Convierte una entidad de dominio en una entidad de persistencia.
+     *
+     * @param product producto de dominio a convertir.
+     * @return la entidad JPA de producto resultante.
+     */
     public static ProductEntity toEntity(Product product) {
         ProductEntity entity = new ProductEntity();
         entity.setId(product.getId());
@@ -70,6 +88,12 @@ public final class ProductEntityMapper {
         return entity;
     }
 
+    /**
+     * Convierte una entidad JPA de categoría en una categoría de dominio.
+     *
+     * @param entity entidad JPA de categoría a convertir.
+     * @return la categoría de dominio resultante.
+     */
     private static Category toDomainCategory(CategoryEntity entity) {
         Category category = new Category(entity.getId(), new Name(entity.getName()));
         if (Boolean.TRUE.equals(entity.getActive())) {

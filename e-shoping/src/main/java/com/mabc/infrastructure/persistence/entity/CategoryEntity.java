@@ -7,6 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad JPA que representa la tabla {@code categories} de la base de datos.
+ *
+ * <p>Contiene la información persistida de una categoría, incluyendo su
+ * nombre y su estado de actividad.
+ */
 @Entity
 @Table(name = "categories")
 public class CategoryEntity {

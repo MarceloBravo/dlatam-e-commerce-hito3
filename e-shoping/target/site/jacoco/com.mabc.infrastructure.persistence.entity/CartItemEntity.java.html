@@ -8,6 +8,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad JPA que representa la tabla {@code cart_items} de la base de datos.
+ *
+ * &lt;p&gt;Contiene la información persistida de un ítem de carrito, vinculando un
+ * carrito con un producto y su cantidad.
+ */
 @Entity
 @Table(name = &quot;cart_items&quot;)
 public class CartItemEntity {
@@ -28,47 +34,47 @@ public class CartItemEntity {
 
     private Double subTotal;
 
-<span class="nc" id="L31">    public CartItemEntity() {</span>
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L37">    public CartItemEntity() {</span>
+<span class="nc" id="L38">    }</span>
 
     public Long getId() {
-<span class="nc" id="L35">        return id;</span>
+<span class="nc" id="L41">        return id;</span>
     }
 
     public void setId(Long id) {
-<span class="nc" id="L39">        this.id = id;</span>
-<span class="nc" id="L40">    }</span>
+<span class="nc" id="L45">        this.id = id;</span>
+<span class="nc" id="L46">    }</span>
 
     public CartEntity getCart() {
-<span class="nc" id="L43">        return cart;</span>
+<span class="nc" id="L49">        return cart;</span>
     }
 
     public void setCart(CartEntity cart) {
-<span class="nc" id="L47">        this.cart = cart;</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L53">        this.cart = cart;</span>
+<span class="nc" id="L54">    }</span>
 
     public ProductEntity getProduct() {
-<span class="nc" id="L51">        return product;</span>
+<span class="nc" id="L57">        return product;</span>
     }
 
     public void setProduct(ProductEntity product) {
-<span class="nc" id="L55">        this.product = product;</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L61">        this.product = product;</span>
+<span class="nc" id="L62">    }</span>
 
     public Integer getCant() {
-<span class="nc" id="L59">        return cant;</span>
+<span class="nc" id="L65">        return cant;</span>
     }
 
     public void setCant(Integer cant) {
-<span class="nc" id="L63">        this.cant = cant;</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L69">        this.cant = cant;</span>
+<span class="nc" id="L70">    }</span>
 
     public Double getSubTotal() {
-<span class="nc" id="L67">        return subTotal;</span>
+<span class="nc" id="L73">        return subTotal;</span>
     }
 
     public void setSubTotal(Double subTotal) {
-<span class="nc" id="L71">        this.subTotal = subTotal;</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L77">        this.subTotal = subTotal;</span>
+<span class="nc" id="L78">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

@@ -8,6 +8,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad JPA que representa la tabla {@code cart_items} de la base de datos.
+ *
+ * <p>Contiene la información persistida de un ítem de carrito, vinculando un
+ * carrito con un producto y su cantidad.
+ */
 @Entity
 @Table(name = "cart_items")
 public class CartItemEntity {

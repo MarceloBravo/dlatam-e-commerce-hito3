@@ -11,25 +11,46 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementación de {@link CartRepository} basada en JPA/Spring Data.
+ *
+ * <p>Convierte entre las entidades de dominio {@link Cart} y las entidades
+ * de persistencia {@link CartEntity} delegando el acceso a la base de datos
+ * en {@link CartJpaRepository}.
+ */
 @Repository
 public class JpaCartRepository implements CartRepository {
 
     private final CartJpaRepository cartJpaRepository;
 
+    /**
+     * Crea el repositorio JPA de carritos.
+     *
+     * @param cartJpaRepository repositorio Spring Data de entidades de carrito.
+     */
     public JpaCartRepository(CartJpaRepository cartJpaRepository) {
         this.cartJpaRepository = cartJpaRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Cart> findById(Long id) {
         return cartJpaRepository.findById(id).map(this::toDomain);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Cart> findLast() {
         return cartJpaRepository.findTopByOrderByIdDesc().map(this::toDomain);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Cart save(Cart cart) {
         CartEntity saved = cartJpaRepository.save(toEntity(cart));

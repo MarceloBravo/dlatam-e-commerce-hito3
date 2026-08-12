@@ -1,10 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 e-shoping,com.mabc,App,99,0,0,0,20,0,2,0,2,0
-e-shoping,com.mabc.infrastructure.persistence,JpaCategoryRepository,90,0,2,0,17,0,10,0,9,0
-e-shoping,com.mabc.infrastructure.persistence,JpaMarkRepository,80,0,2,0,16,0,9,0,8,0
-e-shoping,com.mabc.infrastructure.persistence,JpaCartRepository,132,0,4,0,31,0,9,0,7,0
-e-shoping,com.mabc.infrastructure.persistence,JpaProductRepository,41,0,0,0,10,0,6,0,6,0
-e-shoping,com.mabc.infrastructure.persistence,ProductEntityMapper,175,0,6,0,42,0,7,0,4,0
+e-shoping,com.mabc.infrastructure.persistence.jpa,ProductEntityMapper,175,0,6,0,42,0,7,0,4,0
+e-shoping,com.mabc.infrastructure.persistence.jpa,JpaCategoryRepository,90,0,2,0,17,0,10,0,9,0
+e-shoping,com.mabc.infrastructure.persistence.jpa,JpaCartRepository,132,0,4,0,31,0,9,0,7,0
+e-shoping,com.mabc.infrastructure.persistence.jpa,JpaProductRepository,41,0,0,0,10,0,6,0,6,0
+e-shoping,com.mabc.infrastructure.persistence.jpa,JpaMarkRepository,80,0,2,0,16,0,9,0,8,0
 e-shoping,com.mabc.domain.valueobject,Quantity,0,13,0,2,0,4,0,2,0,1
 e-shoping,com.mabc.domain.valueobject,Name,0,19,0,4,0,5,0,3,0,1
 e-shoping,com.mabc.domain.valueobject,Weight,0,15,0,2,0,4,0,2,0,1

@@ -2,12 +2,24 @@
 
 import com.mabc.domain.exception.InvalidStockException;
 
+/**
+ * Value object que representa el stock de un producto.
+ *
+ * &lt;p&gt;Valida que el stock no sea negativo.
+ *
+ * @param value valor del stock.
+ */
 public record Stock(int value) {
 
-<span class="fc" id="L7">    public Stock {</span>
-<span class="fc bfc" id="L8" title="All 2 branches covered.">        if (value &lt; 0) {</span>
-<span class="fc" id="L9">            throw new InvalidStockException(&quot;El stock no puede ser negativo.&quot;);</span>
+    /**
+     * Constructor compacto que valida el stock.
+     *
+     * @throws InvalidStockException si el stock es negativo.
+     */
+<span class="fc" id="L19">    public Stock {</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (value &lt; 0) {</span>
+<span class="fc" id="L21">            throw new InvalidStockException(&quot;El stock no puede ser negativo.&quot;);</span>
         }
-<span class="fc" id="L11">    }</span>
+<span class="fc" id="L23">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

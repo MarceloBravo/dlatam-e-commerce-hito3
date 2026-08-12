@@ -2,12 +2,24 @@
 
 import com.mabc.domain.exception.InvalidWeightException;
 
+/**
+ * Value object que representa un peso.
+ *
+ * &lt;p&gt;Valida que el peso sea mayor a cero.
+ *
+ * @param value valor del peso.
+ */
 public record Weight(double value) {
 
-<span class="fc" id="L7">    public Weight {</span>
-<span class="fc bfc" id="L8" title="All 2 branches covered.">        if (value &lt;= 0) {</span>
-<span class="fc" id="L9">            throw new InvalidWeightException(&quot;El peso debe ser mayor a cero.&quot;);</span>
+    /**
+     * Constructor compacto que valida el peso.
+     *
+     * @throws InvalidWeightException si el peso es menor o igual a cero.
+     */
+<span class="fc" id="L19">    public Weight {</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (value &lt;= 0) {</span>
+<span class="fc" id="L21">            throw new InvalidWeightException(&quot;El peso debe ser mayor a cero.&quot;);</span>
         }
-<span class="fc" id="L11">    }</span>
+<span class="fc" id="L23">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

@@ -6,14 +6,35 @@ import com.mabc.domain.valueobject.Name;
 
 import java.util.List;
 
+/**
+ * Caso de uso que crea o actualiza una categoría.
+ *
+ * <p>Si se entrega un {@code id} nulo se crea una categoría nueva; en caso
+ * contrario se actualiza la categoría existente. También permite activarla o
+ * desactivarla según el estado recibido.
+ */
 public class SaveCategoryUseCase {
 
     private final CategoryRepository categoryRepository;
 
+    /**
+     * Crea el caso de uso con el repositorio de categorías.
+     *
+     * @param categoryRepository repositorio de categorías.
+     */
     public SaveCategoryUseCase(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
+    /**
+     * Crea o actualiza una categoría y la persiste.
+     *
+     * @param id     identificador de la categoría; si es {@code null} se crea una nueva.
+     * @param name   nombre de la categoría.
+     * @param active {@code true} para activar la categoría, {@code false} para desactivarla.
+     * @return la categoría creada o actualizada.
+     * @throws IllegalArgumentException si se entrega un {@code id} y la categoría no existe.
+     */
     public Category execute(Long id, String name, boolean active) {
         Name categoryName = new Name(name);
 

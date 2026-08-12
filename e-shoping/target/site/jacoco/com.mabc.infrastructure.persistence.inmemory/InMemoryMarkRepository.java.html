@@ -4,41 +4,60 @@ import com.mabc.domain.entity.Mark;
 import com.mabc.domain.repository.MarkRepository;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
-<span class="fc" id="L14">public class InMemoryMarkRepository implements MarkRepository {</span>
+/**
+ * Implementación en memoria de {@link MarkRepository}.
+ *
+ * &lt;p&gt;Almacena las marcas en un {@link LinkedHashMap} que conserva el orden
+ * de inserción, sin persistencia entre ejecuciones de la aplicación.
+ */
+<span class="fc" id="L18">public class InMemoryMarkRepository implements MarkRepository {</span>
 
-<span class="fc" id="L16">        private final Map&lt;Long, Mark&gt; store = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L20">    private final Map&lt;Long, Mark&gt; store = new LinkedHashMap&lt;&gt;();</span>
 
-        @Override
-        public Optional&lt;Mark&gt; findById(Long id) {
-<span class="fc" id="L20">            return Optional.ofNullable(store.get(id));</span>
-        }
-
-        @Override
-        public List&lt;Mark&gt; findAll() {
-<span class="fc" id="L25">            return new ArrayList&lt;&gt;(store.values());</span>
-        }
-
-        @Override
-        public Mark save(Mark mark) {
-<span class="fc" id="L30">            store.put(mark.getId(), mark);</span>
-<span class="fc" id="L31">            return mark;</span>
-        }
-
-        @Override
-        public void deleteById(Long id) {
-<span class="nc" id="L36">            store.remove(id);</span>
-<span class="nc" id="L37">        }</span>
-
-        @Override
-        public boolean existsById(Long id) {
-<span class="nc" id="L41">            return store.containsKey(id);</span>
-        }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional&lt;Mark&gt; findById(Long id) {
+<span class="fc" id="L27">        return Optional.ofNullable(store.get(id));</span>
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List&lt;Mark&gt; findAll() {
+<span class="fc" id="L35">        return new ArrayList&lt;&gt;(store.values());</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Mark save(Mark mark) {
+<span class="fc" id="L43">        store.put(mark.getId(), mark);</span>
+<span class="fc" id="L44">        return mark;</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteById(Long id) {
+<span class="nc" id="L52">        store.remove(id);</span>
+<span class="nc" id="L53">    }</span>
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean existsById(Long id) {
+<span class="nc" id="L60">        return store.containsKey(id);</span>
+    }
+}
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

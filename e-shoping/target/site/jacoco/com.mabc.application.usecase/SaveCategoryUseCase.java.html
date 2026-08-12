@@ -6,40 +6,61 @@ import com.mabc.domain.valueobject.Name;
 
 import java.util.List;
 
+/**
+ * Caso de uso que crea o actualiza una categoría.
+ *
+ * &lt;p&gt;Si se entrega un {@code id} nulo se crea una categoría nueva; en caso
+ * contrario se actualiza la categoría existente. También permite activarla o
+ * desactivarla según el estado recibido.
+ */
 public class SaveCategoryUseCase {
 
     private final CategoryRepository categoryRepository;
 
-<span class="fc" id="L13">    public SaveCategoryUseCase(CategoryRepository categoryRepository) {</span>
-<span class="fc" id="L14">        this.categoryRepository = categoryRepository;</span>
-<span class="fc" id="L15">    }</span>
+    /**
+     * Crea el caso de uso con el repositorio de categorías.
+     *
+     * @param categoryRepository repositorio de categorías.
+     */
+<span class="fc" id="L25">    public SaveCategoryUseCase(CategoryRepository categoryRepository) {</span>
+<span class="fc" id="L26">        this.categoryRepository = categoryRepository;</span>
+<span class="fc" id="L27">    }</span>
 
+    /**
+     * Crea o actualiza una categoría y la persiste.
+     *
+     * @param id     identificador de la categoría; si es {@code null} se crea una nueva.
+     * @param name   nombre de la categoría.
+     * @param active {@code true} para activar la categoría, {@code false} para desactivarla.
+     * @return la categoría creada o actualizada.
+     * @throws IllegalArgumentException si se entrega un {@code id} y la categoría no existe.
+     */
     public Category execute(Long id, String name, boolean active) {
-<span class="fc" id="L18">        Name categoryName = new Name(name);</span>
+<span class="fc" id="L39">        Name categoryName = new Name(name);</span>
 
         Category category;
-<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (id == null) {</span>
-<span class="fc" id="L22">            category = new Category(nextId(), categoryName);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (id == null) {</span>
+<span class="fc" id="L43">            category = new Category(nextId(), categoryName);</span>
         } else {
-<span class="fc" id="L24">            category = categoryRepository.findById(id)</span>
-<span class="pc" id="L25">                    .orElseThrow(() -&gt; new IllegalArgumentException(&quot;La categoría no existe.&quot;));</span>
-<span class="fc" id="L26">            category.rename(categoryName);</span>
+<span class="fc" id="L45">            category = categoryRepository.findById(id)</span>
+<span class="pc" id="L46">                    .orElseThrow(() -&gt; new IllegalArgumentException(&quot;La categoría no existe.&quot;));</span>
+<span class="fc" id="L47">            category.rename(categoryName);</span>
         }
 
-<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (active) {</span>
-<span class="fc" id="L30">            category.activate();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (active) {</span>
+<span class="fc" id="L51">            category.activate();</span>
         } else {
-<span class="fc" id="L32">            category.deactivate();</span>
+<span class="fc" id="L53">            category.deactivate();</span>
         }
 
-<span class="fc" id="L35">        return categoryRepository.save(category);</span>
+<span class="fc" id="L56">        return categoryRepository.save(category);</span>
     }
 
     private Long nextId() {
-<span class="fc" id="L39">        return categoryRepository.findAll().stream()</span>
-<span class="fc" id="L40">                .mapToLong(Category::getId)</span>
-<span class="fc" id="L41">                .max()</span>
-<span class="fc" id="L42">                .orElse(0L) + 1;</span>
+<span class="fc" id="L60">        return categoryRepository.findAll().stream()</span>
+<span class="fc" id="L61">                .mapToLong(Category::getId)</span>
+<span class="fc" id="L62">                .max()</span>
+<span class="fc" id="L63">                .orElse(0L) + 1;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

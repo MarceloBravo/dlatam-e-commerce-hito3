@@ -4,41 +4,60 @@ import com.mabc.domain.entity.Product;
 import com.mabc.domain.repository.ProductRepository;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
-<span class="fc" id="L14">public class InMemoryProductRepository implements ProductRepository {</span>
+/**
+ * Implementación en memoria de {@link ProductRepository}.
+ *
+ * &lt;p&gt;Almacena los productos en un {@link LinkedHashMap} que conserva el orden
+ * de inserción, sin persistencia entre ejecuciones de la aplicación.
+ */
+<span class="fc" id="L18">public class InMemoryProductRepository implements ProductRepository {</span>
 
-<span class="fc" id="L16">    private final Map&lt;Long, Product&gt; store = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L20">    private final Map&lt;Long, Product&gt; store = new LinkedHashMap&lt;&gt;();</span>
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional&lt;Product&gt; findById(Long id) {
-<span class="fc" id="L20">        return Optional.ofNullable(store.get(id));</span>
+<span class="fc" id="L27">        return Optional.ofNullable(store.get(id));</span>
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List&lt;Product&gt; findAll() {
-<span class="fc" id="L25">        return new ArrayList&lt;&gt;(store.values());</span>
+<span class="fc" id="L35">        return new ArrayList&lt;&gt;(store.values());</span>
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Product save(Product product) {
-<span class="fc" id="L30">        store.put(product.getId(), product);</span>
-<span class="fc" id="L31">        return product;</span>
+<span class="fc" id="L43">        store.put(product.getId(), product);</span>
+<span class="fc" id="L44">        return product;</span>
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteById(Long id) {
-<span class="nc" id="L36">        store.remove(id);</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L52">        store.remove(id);</span>
+<span class="nc" id="L53">    }</span>
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean existsById(Long id) {
-<span class="nc" id="L41">        return store.containsKey(id);</span>
+<span class="nc" id="L60">        return store.containsKey(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

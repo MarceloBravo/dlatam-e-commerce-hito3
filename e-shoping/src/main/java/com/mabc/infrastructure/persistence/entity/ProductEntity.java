@@ -14,6 +14,12 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entidad JPA que representa la tabla {@code products} de la base de datos.
+ *
+ * <p>Contiene la información persistida de un producto, incluyendo su marca,
+ * sus categorías y todos sus atributos comerciales.
+ */
 @Entity
 @Table(name = "products")
 public class ProductEntity {

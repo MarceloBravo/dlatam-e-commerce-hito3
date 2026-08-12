@@ -12,6 +12,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entidad JPA que representa la tabla {@code carts} de la base de datos.
+ *
+ * <p>Contiene la información persistida de un carrito de compras, incluida
+ * su lista de ítems y el subtotal calculado.
+ */
 @Entity
 @Table(name = "carts")
 public class CartEntity {

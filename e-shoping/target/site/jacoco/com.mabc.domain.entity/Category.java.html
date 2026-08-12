@@ -4,40 +4,80 @@ import com.mabc.domain.valueobject.Name;
 
 import java.util.Objects;
 
+/**
+ * Entidad de dominio que representa una categoría de productos.
+ *
+ * &lt;p&gt;Una categoría tiene un nombre y un estado de actividad que permite
+ * activarla o desactivarla dentro del catálogo.
+ */
 public class Category {
 
     private final Long id;
     private Name name;
     private boolean active;
 
-<span class="fc" id="L13">    public Category(Long id, Name name) {</span>
-<span class="fc" id="L14">        this.id = Objects.requireNonNull(id, &quot;El ID de la categoría no puede ser nulo.&quot;);</span>
-<span class="fc" id="L15">        this.name = Objects.requireNonNull(name, &quot;El nombre de la categoría no puede ser nulo.&quot;);</span>
-<span class="fc" id="L16">        this.active = true;</span>
-<span class="fc" id="L17">    }</span>
+    /**
+     * Crea una categoría activa con el nombre indicado.
+     *
+     * @param id   identificador de la categoría; no puede ser {@code null}.
+     * @param name nombre de la categoría; no puede ser {@code null}.
+     * @throws NullPointerException si {@code id} o {@code name} son {@code null}.
+     */
+<span class="fc" id="L26">    public Category(Long id, Name name) {</span>
+<span class="fc" id="L27">        this.id = Objects.requireNonNull(id, &quot;El ID de la categoría no puede ser nulo.&quot;);</span>
+<span class="fc" id="L28">        this.name = Objects.requireNonNull(name, &quot;El nombre de la categoría no puede ser nulo.&quot;);</span>
+<span class="fc" id="L29">        this.active = true;</span>
+<span class="fc" id="L30">    }</span>
 
+    /**
+     * Obtiene el identificador de la categoría.
+     *
+     * @return el identificador de la categoría.
+     */
     public Long getId() {
-<span class="fc" id="L20">        return id;</span>
+<span class="fc" id="L38">        return id;</span>
     }
 
+    /**
+     * Obtiene el nombre de la categoría.
+     *
+     * @return el nombre de la categoría.
+     */
     public Name getName() {
-<span class="fc" id="L24">        return name;</span>
+<span class="fc" id="L47">        return name;</span>
     }
 
+    /**
+     * Indica si la categoría está activa.
+     *
+     * @return {@code true} si la categoría está activa, {@code false} en caso contrario.
+     */
     public boolean isActive() {
-<span class="fc" id="L28">        return active;</span>
+<span class="fc" id="L56">        return active;</span>
     }
 
+    /**
+     * Renombra la categoría.
+     *
+     * @param newName el nuevo nombre; no puede ser {@code null}.
+     * @throws NullPointerException si {@code newName} es {@code null}.
+     */
     public void rename(Name newName) {
-<span class="fc" id="L32">        this.name = Objects.requireNonNull(newName, &quot;El nuevo nombre de la categoría no puede ser nulo.&quot;);</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L66">        this.name = Objects.requireNonNull(newName, &quot;El nuevo nombre de la categoría no puede ser nulo.&quot;);</span>
+<span class="fc" id="L67">    }</span>
 
+    /**
+     * Activa la categoría.
+     */
     public void activate() {
-<span class="fc" id="L36">        this.active = true;</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L73">        this.active = true;</span>
+<span class="fc" id="L74">    }</span>
 
+    /**
+     * Desactiva la categoría.
+     */
     public void deactivate() {
-<span class="fc" id="L40">        this.active = false;</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L80">        this.active = false;</span>
+<span class="fc" id="L81">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
