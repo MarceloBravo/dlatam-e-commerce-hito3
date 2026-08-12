@@ -9,10 +9,10 @@ import com.mabc.domain.entity.Cart;
 import com.mabc.domain.entity.Category;
 import com.mabc.domain.entity.Mark;
 import com.mabc.domain.entity.Product;
-import com.mabc.infrastructure.persistence.inmemory.InMemoryRepositories.InMemoryCartRepository;
-import com.mabc.infrastructure.persistence.inmemory.InMemoryRepositories.InMemoryCategoryRepository;
-import com.mabc.infrastructure.persistence.inmemory.InMemoryRepositories.InMemoryMarkRepository;
-import com.mabc.infrastructure.persistence.inmemory.InMemoryRepositories.InMemoryProductRepository;
+import com.mabc.infrastructure.persistence.inmemory.InMemoryCartRepository;
+import com.mabc.infrastructure.persistence.inmemory.InMemoryCategoryRepository;
+import com.mabc.infrastructure.persistence.inmemory.InMemoryMarkRepository;
+import com.mabc.infrastructure.persistence.inmemory.InMemoryProductRepository;
 
 import java.util.List;
 

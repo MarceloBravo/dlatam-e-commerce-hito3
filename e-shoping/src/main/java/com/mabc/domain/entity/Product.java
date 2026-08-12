@@ -24,8 +24,17 @@ public class Product {
     private Price priceCost;
     private Price priceSale;
 
-    public Product(Long id, Mark mark, List<Category> categories, Name name, Description description,
-                   Stock stock, Weight weight, Price priceCost, Price priceSale) {
+    public Product(
+        Long id, 
+        Mark mark, 
+        List<Category> categories, 
+        Name name, 
+        Description description,
+        Stock stock, 
+        Weight weight, 
+        Price priceCost, 
+        Price priceSale
+    ) {
         this.id = Objects.requireNonNull(id, "El ID del producto no puede ser nulo.");
         this.mark = Objects.requireNonNull(mark, "La marca del producto no puede ser nula.");
         this.categories = categories == null ? new ArrayList<>() : new ArrayList<>(categories);

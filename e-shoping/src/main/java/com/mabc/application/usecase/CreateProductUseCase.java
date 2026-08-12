@@ -20,15 +20,27 @@ public class CreateProductUseCase {
     private final CategoryRepository categoryRepository;
     private final MarkRepository markRepository;
 
-    public CreateProductUseCase(ProductRepository productRepository, CategoryRepository categoryRepository,
-                                MarkRepository markRepository) {
+    public CreateProductUseCase(
+        ProductRepository productRepository, 
+        CategoryRepository categoryRepository,
+        MarkRepository markRepository
+    ) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.markRepository = markRepository;
     }
 
-    public Product execute(Long id, Long markId, List<Long> categoryIds, String name, String description,
-                           int stock, double weight, double priceCost, double priceSale) {
+    public Product execute(
+        Long id, 
+        Long markId, 
+        List<Long> categoryIds, 
+        String name, 
+        String description,
+        int stock, 
+        double weight, 
+        double priceCost, 
+        double priceSale
+    ) {
         Mark mark = markRepository.findById(markId)
                 .orElseThrow(() -> new IllegalArgumentException("La marca no existe."));
 

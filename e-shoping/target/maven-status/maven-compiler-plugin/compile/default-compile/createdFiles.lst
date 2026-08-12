@@ -2,7 +2,6 @@ com\mabc\domain\exception\InvalidStockException.class
 com\mabc\domain\entity\Category.class
 com\mabc\infrastructure\persistence\spring\ProductJpaRepository.class
 com\mabc\domain\valueobject\Description.class
-com\mabc\infrastructure\persistence\inmemory\InMemoryRepositories$InMemoryCartRepository.class
 com\mabc\domain\exception\InvalidDescriptionException.class
 com\mabc\application\usecase\SaveMarkUseCase.class
 com\mabc\domain\valueobject\Quantity.class
@@ -11,6 +10,7 @@ com\mabc\infrastructure\persistence\entity\CartItemEntity.class
 com\mabc\App.class
 com\mabc\domain\exception\DomainException.class
 com\mabc\application\usecase\AddItemToCartUseCase.class
+com\mabc\infrastructure\persistence\inmemory\InMemoryMarkRepository.class
 com\mabc\infrastructure\persistence\JpaMarkRepository.class
 com\mabc\infrastructure\persistence\JpaProductRepository.class
 com\mabc\domain\exception\InvalidNameException.class
@@ -20,11 +20,11 @@ com\mabc\domain\entity\Product.class
 com\mabc\domain\repository\MarkRepository.class
 com\mabc\infrastructure\persistence\entity\CategoryEntity.class
 com\mabc\domain\valueobject\Price.class
-com\mabc\infrastructure\persistence\inmemory\InMemoryRepositories.class
-com\mabc\infrastructure\persistence\inmemory\InMemoryRepositories$InMemoryProductRepository.class
+com\mabc\infrastructure\persistence\inmemory\InMemoryProductRepository.class
 com\mabc\domain\exception\InvalidPriceException.class
 com\mabc\domain\repository\CartRepository.class
 com\mabc\domain\exception\InvalidWeightException.class
+com\mabc\infrastructure\persistence\inmemory\InMemoryCartRepository.class
 com\mabc\application\usecase\SaveCategoryUseCase.class
 com\mabc\domain\entity\Cart.class
 com\mabc\infrastructure\persistence\JpaCartRepository.class
@@ -35,10 +35,9 @@ com\mabc\domain\valueobject\Stock.class
 com\mabc\infrastructure\persistence\ProductEntityMapper.class
 com\mabc\application\usecase\CreateCartUseCase.class
 com\mabc\infrastructure\persistence\entity\MarkEntity.class
-com\mabc\infrastructure\persistence\inmemory\InMemoryRepositories$InMemoryMarkRepository.class
 com\mabc\domain\valueobject\Name.class
 com\mabc\domain\entity\CartItem.class
-com\mabc\infrastructure\persistence\inmemory\InMemoryRepositories$InMemoryCategoryRepository.class
+com\mabc\infrastructure\persistence\inmemory\InMemoryCategoryRepository.class
 com\mabc\domain\repository\ProductRepository.class
 com\mabc\infrastructure\persistence\JpaCategoryRepository.class
 com\mabc\domain\entity\Mark.class
