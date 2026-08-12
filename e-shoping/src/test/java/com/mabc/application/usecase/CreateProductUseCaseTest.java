@@ -78,4 +78,30 @@ class CreateProductUseCaseTest {
         assertThrows(IllegalArgumentException.class, () -> useCase.execute(
                 null, 1L, List.of(999L), "Name", "Desc", 1, 1500, 1, 2));
     }
+
+    @Test
+    @DisplayName("Lanza excepcion si se actualiza un producto inexistente")
+    void rejectsUpdatingMissingProduct() {
+        assertThrows(IllegalArgumentException.class, () -> useCase.execute(
+                99L, 1L, List.of(1L), "Name", "Desc", 1, 1500, 1, 2));
+    }
+
+    @Test
+    @DisplayName("Lanza excepcion si la lista de categorias esta vacia")
+    void rejectsEmptyCategoryList() {
+        assertThrows(IllegalArgumentException.class, () -> useCase.execute(
+                null, 1L, List.of(), "Name", "Desc", 1, 1500, 1, 2));
+    }
+
+    @Test
+    @DisplayName("Asigna un id incremental cuando se crean varios productos")
+    void assignsIncrementalIds() {
+        Product first = useCase.execute(null, 1L, List.of(1L),
+                "Producto 1", "Desc", 1, 1500, 1, 2);
+        Product second = useCase.execute(null, 1L, List.of(1L),
+                "Producto 2", "Desc", 1, 1500, 1, 2);
+
+        assertEquals(1L, first.getId());
+        assertEquals(2L, second.getId());
+    }
 }

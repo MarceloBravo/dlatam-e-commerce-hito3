@@ -48,4 +48,27 @@ class SaveCategoryUseCaseTest {
 
         assertThrows(InvalidNameException.class, () -> useCase.execute(null, "   ", true));
     }
+
+    @Test
+    @DisplayName("Lanza excepcion si se actualiza una categoria inexistente")
+    void rejectsUpdatingMissingCategory() {
+        InMemoryCategoryRepository repository = new InMemoryCategoryRepository();
+        SaveCategoryUseCase useCase = new SaveCategoryUseCase(repository);
+
+        assertThrows(IllegalArgumentException.class, () -> useCase.execute(99L, "Gaming", true));
+    }
+
+    @Test
+    @DisplayName("Activa y desactiva la categoria segun el estado recibido")
+    void togglesActiveState() {
+        InMemoryCategoryRepository repository = new InMemoryCategoryRepository();
+        SaveCategoryUseCase useCase = new SaveCategoryUseCase(repository);
+        Category created = useCase.execute(null, "Computacion", false);
+
+        assertFalse(created.isActive());
+
+        Category reactivated = useCase.execute(created.getId(), "Computacion", true);
+
+        assertTrue(reactivated.isActive());
+    }
 }

@@ -54,4 +54,46 @@ class CartTest {
         assertThrows(IllegalStateException.class, () -> cart.addItem(product, new Quantity(99)));
         assertTrue(cart.getItems().isEmpty());
     }
+
+    @Test
+    @DisplayName("addItem: rechaza producto nulo")
+    void addItemRejectsNullProduct() {
+        assertThrows(NullPointerException.class, () -> cart.addItem(null, new Quantity(1)));
+    }
+
+    @Test
+    @DisplayName("addItem: rechaza cantidad nula")
+    void addItemRejectsNullQuantity() {
+        assertThrows(NullPointerException.class, () -> cart.addItem(product, null));
+    }
+
+    @Test
+    @DisplayName("addItem: acumula el subtotal con varios items")
+    void subTotalAccumulatesAcrossItems() {
+        Product other = new Product(2L, new Mark(1L, new Name("Lenovo")), List.of(),
+                new Name("Mouse"), new Description("Mouse inalambrico"),
+                new Stock(20), new Weight(100), new Price(5000), new Price(10000));
+
+        cart.addItem(product, new Quantity(2));
+        cart.addItem(other, new Quantity(3));
+
+        assertEquals(2, cart.getItems().size());
+        assertEquals(1630000, cart.getSubTotal());
+    }
+
+    @Test
+    @DisplayName("calculateSubTotal: recalcula el subtotal desde los items")
+    void calculateSubTotalRecomputes() {
+        cart.addItem(product, new Quantity(2));
+        assertEquals(1600000, cart.getSubTotal());
+
+        cart.calculateSubTotal();
+        assertEquals(1600000, cart.getSubTotal());
+    }
+
+    @Test
+    @DisplayName("getItems: devuelve una lista no modificable")
+    void itemsAreUnmodifiable() {
+        assertThrows(UnsupportedOperationException.class, () -> cart.getItems().add(null));
+    }
 }

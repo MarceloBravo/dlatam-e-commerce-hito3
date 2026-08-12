@@ -69,4 +69,36 @@ class ProductTest {
         assertEquals(600000, product.getPriceCost().value());
         assertEquals(900000, product.getPriceSale().value());
     }
+
+    @Test
+    @DisplayName("Getters: recuperan marca, peso y precio de costo")
+    void gettersReturnValues() {
+        assertEquals("Lenovo", product.getMark().getName().value());
+        assertEquals(1500, product.getWeight().value());
+        assertEquals(650000, product.getPriceCost().value());
+    }
+
+    @Test
+    @DisplayName("updateDescription: actualiza la descripcion")
+    void updateDescriptionUpdatesValue() {
+        product.updateDescription(new Description("Descripcion nueva"));
+
+        assertEquals("Descripcion nueva", product.getDescription().value());
+    }
+
+    @Test
+    @DisplayName("Mutadores: rechazan argumentos nulos")
+    void mutatorsRejectNullArguments() {
+        assertThrows(NullPointerException.class, () -> product.rename(null));
+        assertThrows(NullPointerException.class, () -> product.updateDescription(null));
+        assertThrows(NullPointerException.class, () -> product.restock(null));
+        assertThrows(NullPointerException.class, () -> product.updatePrices(null, new Price(1)));
+        assertThrows(NullPointerException.class, () -> product.updatePrices(new Price(1), null));
+    }
+
+    @Test
+    @DisplayName("getCategories: devuelve una lista no modificable")
+    void categoriesAreUnmodifiable() {
+        assertThrows(UnsupportedOperationException.class, () -> product.getCategories().add(null));
+    }
 }

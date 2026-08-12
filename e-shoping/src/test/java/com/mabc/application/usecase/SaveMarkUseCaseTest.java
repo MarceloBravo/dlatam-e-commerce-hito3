@@ -48,4 +48,27 @@ class SaveMarkUseCaseTest {
 
         assertThrows(InvalidNameException.class, () -> useCase.execute(null, "", true));
     }
+
+    @Test
+    @DisplayName("Lanza excepcion si se actualiza una marca inexistente")
+    void rejectsUpdatingMissingMark() {
+        InMemoryMarkRepository repository = new InMemoryMarkRepository();
+        SaveMarkUseCase useCase = new SaveMarkUseCase(repository);
+
+        assertThrows(IllegalArgumentException.class, () -> useCase.execute(99L, "Asus", true));
+    }
+
+    @Test
+    @DisplayName("Activa y desactiva la marca segun el estado recibido")
+    void togglesActiveState() {
+        InMemoryMarkRepository repository = new InMemoryMarkRepository();
+        SaveMarkUseCase useCase = new SaveMarkUseCase(repository);
+        Mark created = useCase.execute(null, "Lenovo", false);
+
+        assertFalse(created.isActive());
+
+        Mark reactivated = useCase.execute(created.getId(), "Lenovo", true);
+
+        assertTrue(reactivated.isActive());
+    }
 }
