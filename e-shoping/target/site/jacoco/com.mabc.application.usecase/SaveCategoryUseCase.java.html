@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SaveCategoryUseCase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">e-shoping</a> &gt; <a href="index.source.html" class="el_package">com.mabc.application.usecase</a> &gt; <span class="el_source">SaveCategoryUseCase.java</span></div><h1>SaveCategoryUseCase.java</h1><pre class="source lang-java linenums">package com.mabc.application.usecase;
+
+import com.mabc.domain.entity.Category;
+import com.mabc.domain.repository.CategoryRepository;
+import com.mabc.domain.valueobject.Name;
+
+import java.util.List;
+
+public class SaveCategoryUseCase {
+
+    private final CategoryRepository categoryRepository;
+
+<span class="fc" id="L13">    public SaveCategoryUseCase(CategoryRepository categoryRepository) {</span>
+<span class="fc" id="L14">        this.categoryRepository = categoryRepository;</span>
+<span class="fc" id="L15">    }</span>
+
+    public Category execute(Long id, String name, boolean active) {
+<span class="fc" id="L18">        Name categoryName = new Name(name);</span>
+
+        Category category;
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (id == null) {</span>
+<span class="fc" id="L22">            category = new Category(nextId(), categoryName);</span>
+        } else {
+<span class="fc" id="L24">            category = categoryRepository.findById(id)</span>
+<span class="pc" id="L25">                    .orElseThrow(() -&gt; new IllegalArgumentException(&quot;La categoría no existe.&quot;));</span>
+<span class="fc" id="L26">            category.rename(categoryName);</span>
+        }
+
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (active) {</span>
+<span class="fc" id="L30">            category.activate();</span>
+        } else {
+<span class="fc" id="L32">            category.deactivate();</span>
+        }
+
+<span class="fc" id="L35">        return categoryRepository.save(category);</span>
+    }
+
+    private Long nextId() {
+<span class="fc" id="L39">        return categoryRepository.findAll().stream()</span>
+<span class="fc" id="L40">                .mapToLong(Category::getId)</span>
+<span class="fc" id="L41">                .max()</span>
+<span class="fc" id="L42">                .orElse(0L) + 1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

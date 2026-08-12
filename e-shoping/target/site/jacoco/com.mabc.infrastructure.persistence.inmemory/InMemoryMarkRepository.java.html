@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InMemoryMarkRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">e-shoping</a> &gt; <a href="index.source.html" class="el_package">com.mabc.infrastructure.persistence.inmemory</a> &gt; <span class="el_source">InMemoryMarkRepository.java</span></div><h1>InMemoryMarkRepository.java</h1><pre class="source lang-java linenums">package com.mabc.infrastructure.persistence.inmemory;
+
+import com.mabc.domain.entity.Mark;
+import com.mabc.domain.repository.MarkRepository;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
+<span class="fc" id="L14">public class InMemoryMarkRepository implements MarkRepository {</span>
+
+<span class="fc" id="L16">        private final Map&lt;Long, Mark&gt; store = new LinkedHashMap&lt;&gt;();</span>
+
+        @Override
+        public Optional&lt;Mark&gt; findById(Long id) {
+<span class="fc" id="L20">            return Optional.ofNullable(store.get(id));</span>
+        }
+
+        @Override
+        public List&lt;Mark&gt; findAll() {
+<span class="fc" id="L25">            return new ArrayList&lt;&gt;(store.values());</span>
+        }
+
+        @Override
+        public Mark save(Mark mark) {
+<span class="fc" id="L30">            store.put(mark.getId(), mark);</span>
+<span class="fc" id="L31">            return mark;</span>
+        }
+
+        @Override
+        public void deleteById(Long id) {
+<span class="nc" id="L36">            store.remove(id);</span>
+<span class="nc" id="L37">        }</span>
+
+        @Override
+        public boolean existsById(Long id) {
+<span class="nc" id="L41">            return store.containsKey(id);</span>
+        }
+    }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

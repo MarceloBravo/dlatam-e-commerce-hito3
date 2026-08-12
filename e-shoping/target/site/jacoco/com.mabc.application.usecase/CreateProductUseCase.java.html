@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreateProductUseCase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">e-shoping</a> &gt; <a href="index.source.html" class="el_package">com.mabc.application.usecase</a> &gt; <span class="el_source">CreateProductUseCase.java</span></div><h1>CreateProductUseCase.java</h1><pre class="source lang-java linenums">package com.mabc.application.usecase;
+
+import com.mabc.domain.entity.Category;
+import com.mabc.domain.entity.Mark;
+import com.mabc.domain.entity.Product;
+import com.mabc.domain.repository.CategoryRepository;
+import com.mabc.domain.repository.MarkRepository;
+import com.mabc.domain.repository.ProductRepository;
+import com.mabc.domain.valueobject.Description;
+import com.mabc.domain.valueobject.Name;
+import com.mabc.domain.valueobject.Price;
+import com.mabc.domain.valueobject.Stock;
+import com.mabc.domain.valueobject.Weight;
+
+import java.util.List;
+
+public class CreateProductUseCase {
+
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final MarkRepository markRepository;
+
+    public CreateProductUseCase(
+        ProductRepository productRepository, 
+        CategoryRepository categoryRepository,
+        MarkRepository markRepository
+<span class="fc" id="L27">    ) {</span>
+<span class="fc" id="L28">        this.productRepository = productRepository;</span>
+<span class="fc" id="L29">        this.categoryRepository = categoryRepository;</span>
+<span class="fc" id="L30">        this.markRepository = markRepository;</span>
+<span class="fc" id="L31">    }</span>
+
+    public Product execute(
+        Long id, 
+        Long markId, 
+        List&lt;Long&gt; categoryIds, 
+        String name, 
+        String description,
+        int stock, 
+        double weight, 
+        double priceCost, 
+        double priceSale
+    ) {
+<span class="fc" id="L44">        Mark mark = markRepository.findById(markId)</span>
+<span class="fc" id="L45">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;La marca no existe.&quot;));</span>
+
+<span class="fc" id="L47">        List&lt;Category&gt; categories = categoryRepository.findAllByIds(categoryIds);</span>
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">        if (categories.isEmpty() || categories.size() != categoryIds.size()) {</span>
+<span class="fc" id="L49">            throw new IllegalArgumentException(&quot;Alguna categoría no existe.&quot;);</span>
+        }
+
+        Product product;
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (id == null) {</span>
+<span class="fc" id="L54">            product = new Product(nextId(), mark, categories, new Name(name), new Description(description),</span>
+                    new Stock(stock), new Weight(weight), new Price(priceCost), new Price(priceSale));
+        } else {
+<span class="fc" id="L57">            product = productRepository.findById(id)</span>
+<span class="pc" id="L58">                    .orElseThrow(() -&gt; new IllegalArgumentException(&quot;El producto no existe.&quot;));</span>
+<span class="fc" id="L59">            product.rename(new Name(name));</span>
+<span class="fc" id="L60">            product.updateDescription(new Description(description));</span>
+<span class="fc" id="L61">            product.restock(new Stock(stock));</span>
+<span class="fc" id="L62">            product.updatePrices(new Price(priceCost), new Price(priceSale));</span>
+        }
+
+<span class="fc" id="L65">        return productRepository.save(product);</span>
+    }
+
+    private Long nextId() {
+<span class="fc" id="L69">        return productRepository.findAll().stream()</span>
+<span class="fc" id="L70">                .mapToLong(Product::getId)</span>
+<span class="fc" id="L71">                .max()</span>
+<span class="fc" id="L72">                .orElse(0L) + 1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

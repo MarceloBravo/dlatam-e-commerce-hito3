@@ -1,0 +1,12 @@
+com\mabc\application\usecase\AddItemToCartUseCaseTest.class
+com\mabc\domain\valueobject\ValueObjectsTest.class
+com\mabc\domain\entity\CartTest.class
+com\mabc\application\usecase\SaveMarkUseCaseTest.class
+com\mabc\application\usecase\SaveCategoryUseCaseTest.class
+com\mabc\application\usecase\CreateCartUseCaseTest.class
+com\mabc\ConsoleCoverageReporter$Counter.class
+com\mabc\domain\entity\MarkTest.class
+com\mabc\application\usecase\CreateProductUseCaseTest.class
+com\mabc\ConsoleCoverageReporter.class
+com\mabc\domain\entity\CategoryTest.class
+com\mabc\domain\entity\ProductTest.class

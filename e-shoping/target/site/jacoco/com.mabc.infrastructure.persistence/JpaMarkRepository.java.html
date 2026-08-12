@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JpaMarkRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">e-shoping</a> &gt; <a href="index.source.html" class="el_package">com.mabc.infrastructure.persistence</a> &gt; <span class="el_source">JpaMarkRepository.java</span></div><h1>JpaMarkRepository.java</h1><pre class="source lang-java linenums">package com.mabc.infrastructure.persistence;
+
+import com.mabc.domain.entity.Mark;
+import com.mabc.domain.repository.MarkRepository;
+import com.mabc.domain.valueobject.Name;
+import com.mabc.infrastructure.persistence.entity.MarkEntity;
+import com.mabc.infrastructure.persistence.spring.MarkJpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class JpaMarkRepository implements MarkRepository {
+
+    private final MarkJpaRepository markJpaRepository;
+
+<span class="nc" id="L18">    public JpaMarkRepository(MarkJpaRepository markJpaRepository) {</span>
+<span class="nc" id="L19">        this.markJpaRepository = markJpaRepository;</span>
+<span class="nc" id="L20">    }</span>
+
+    @Override
+    public Optional&lt;Mark&gt; findById(Long id) {
+<span class="nc" id="L24">        return markJpaRepository.findById(id).map(this::toDomain);</span>
+    }
+
+    @Override
+    public List&lt;Mark&gt; findAll() {
+<span class="nc" id="L29">        return markJpaRepository.findAll().stream().map(this::toDomain).toList();</span>
+    }
+
+    @Override
+    public Mark save(Mark mark) {
+<span class="nc" id="L34">        MarkEntity saved = markJpaRepository.save(toEntity(mark));</span>
+<span class="nc" id="L35">        return toDomain(saved);</span>
+    }
+
+    @Override
+    public void deleteById(Long id) {
+<span class="nc" id="L40">        markJpaRepository.deleteById(id);</span>
+<span class="nc" id="L41">    }</span>
+
+    @Override
+    public boolean existsById(Long id) {
+<span class="nc" id="L45">        return markJpaRepository.existsById(id);</span>
+    }
+
+    private Mark toDomain(MarkEntity entity) {
+<span class="nc" id="L49">        Mark mark = new Mark(entity.getId(), new Name(entity.getName()));</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (Boolean.TRUE.equals(entity.getActive())) {</span>
+<span class="nc" id="L51">            mark.activate();</span>
+        } else {
+<span class="nc" id="L53">            mark.deactivate();</span>
+        }
+<span class="nc" id="L55">        return mark;</span>
+    }
+
+    private MarkEntity toEntity(Mark mark) {
+<span class="nc" id="L59">        return new MarkEntity(mark.getId(), mark.getName().value(), mark.isActive());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

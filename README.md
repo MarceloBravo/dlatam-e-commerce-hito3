@@ -20,7 +20,11 @@ e-shoping/
     │   ├── application/
     │   │   └── usecase/               <- CreateProductUseCase, AddItemToCartUseCase, ...
     │   └── infrastructure/
-    │       └── persistence/           <- Spring Data JPA, entidades JPA, adaptadores, in-memory
+    │       └── persistence/
+    │           ├── entity/            <- Entidades JPA (@Entity): CartEntity, ProductEntity, ...
+    │           ├── inmemory/          <- Implementaciones en memoria (Map): InMemory*Repository
+    │           ├── jpa/               <- Adaptadores JPA (implements *Repository): Jpa*Repository, ProductEntityMapper
+    │           └── spring/            <- Interfaces Spring Data JPA (extends JpaRepository): *JpaRepository
     └── test/java/com/mabc/
         ├── domain/                    <- Tests de entidades y Value Objects
         └── application/usecase/       <- Tests de casos de uso (desacoplamiento)
